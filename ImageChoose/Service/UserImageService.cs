@@ -9,8 +9,13 @@ namespace ImageChoose.Service
 {
     public interface IUserImageService
     {
-         List<UserImage> GetUserImages();
-         ImageViewModel GetImageViewModel(string serverPath,string imageName);
+        IEnumerable<UserImage> GetUserImages();
+        ImageViewModel GetImageViewModel(string serverPath, string imageName);
+        UserImage GetUserImageByImageName(string imageName);
+        UserImage GetUserImageByImageNameAndUsername(string imageName, string userName);
+        List<UserImage> GetUserImages(string userName, bool isLike);
+        void SaveChange();
+        void CreateNewUserImage(UserImage entity);
 
     }
 
@@ -23,12 +28,10 @@ namespace ImageChoose.Service
             this.repository = repository;
         }
 
-
-        public List<UserImage> GetUserImages()
+        public void CreateNewUserImage(UserImage entity)
         {
-            return null;
+            repository.CreateUserImage(entity);
         }
-
 
         public ImageViewModel GetImageViewModel(string serverPath, string imageName)
         {
@@ -39,6 +42,31 @@ namespace ImageChoose.Service
                 ImageName = imageName,
                 ImageArray = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(System.IO.File.ReadAllBytes(serverPath)))
             };
+        }
+
+        public UserImage GetUserImageByImageName(string imageName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserImage GetUserImageByImageNameAndUsername(string imageName, string userName)
+        {
+            return repository.GetUserImages().FirstOrDefault(x => x.ImageName == imageName && x.UserName == userName);
+        }
+
+        public IEnumerable<UserImage> GetUserImages()
+        {
+            return repository.GetUserImages();
+        }
+
+        public List<UserImage> GetUserImages(string userName, bool isLike)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChange()
+        {
+            repository.SaveChange();
         }
     }
 }

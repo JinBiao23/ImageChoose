@@ -8,41 +8,48 @@ using System.Web;
 namespace ImageChoose.Service
 {
     public interface IUserImageRepository {
-        IEnumerable GetUserImages();
+        IEnumerable<UserImage> GetUserImages();
         UserImage GetUserImage(int id);
-        UserImage GetUserImageByImageName(string imageName);
-        UserImage GetUserImageByImageName(string imageName, string userName);
-        IEnumerable GetUserImages(bool likeImage, string userName);
+        void UpdateUserImage(UserImage userImage);
+        void DeleteUserImage(int id);
+        void CreateUserImage(UserImage userImage);
+        void SaveChange();
     }
 
     public class UserImageRepository : IUserImageRepository
     {
         UserImageContext context = new UserImageContext();
          
-        public IEnumerable GetUserImages()
+        public IEnumerable<UserImage> GetUserImages()
         {
-            throw new NotImplementedException();
+            return context.UserImages;
         }
 
         public UserImage GetUserImage(int id)
         {
-            throw new NotImplementedException();
+            return context.UserImages.FirstOrDefault(x => x.Id == id);
+
         }
 
-        public UserImage GetUserImageByImageName(string imageName)
+        public void UpdateUserImage(UserImage userImage)
         {
             throw new NotImplementedException();
         }
 
-
-        public UserImage GetUserImageByImageName(string imageName, string userName)
+        public void DeleteUserImage(int id)
         {
-            return context.UserImages.FirstOrDefault(x => x.ImageName == imageName && x.UserName == userName);
+            throw new NotImplementedException();
         }
 
-        public IEnumerable GetUserImages(bool likeImage, string userName)
+        public void CreateUserImage(UserImage userImage)
         {
-            return context.UserImages.Where(x => x.UserName == userName && x.LikeIt == likeImage).ToList();
+            context.UserImages.Add(userImage);
+            SaveChange();
+        }
+
+        public void SaveChange()
+        {
+            context.SaveChanges();
         }
     }
 }
