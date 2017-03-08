@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+<html ng-app="ImageApp">
+<head>
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/AngularJs")
+    @Scripts.Render("~/bundles/MyAngularJs")
+    @Styles.Render("~/Content/css")
+    <base href="/">
+</head>
+<body class="container">
+    <br />
+    <div ng-view>
+
+    </div>
+</body>
+</html>

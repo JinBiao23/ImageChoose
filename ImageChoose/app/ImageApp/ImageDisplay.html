@@ -1,0 +1,40 @@
+﻿<h2 class="page-header">This is Image View</h2>
+<div class="row hidden" id="alertDiv">
+    <div class="alert alert-info" role="alert">
+        You {{ImagePerference}} image {{SetImageName}}
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" ng-click="GetRandomPicture()" value="Get Random Picture" />
+        <input type="hidden" id="imageName" value="" />
+    </div>
+</div>
+
+<div class="col-md-5"> 
+    <div class="form-group">
+        <label for="userName" class="control-label">You Name</label>
+        <input type="text" name="userName" class="form-control" value="" id="userName" />
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" ng-click="GetLikedImages()" value="Get my liked images" />
+        <input type="button" class="btn btn-primary" ng-click="GetUnLikedImages()" value="Get my unliked images" />
+    </div>
+    <div class="form-group">
+        <img ng-src="{{image}}" />
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" ng-click="LikeImage()" value="Like" />
+        <input type="button" class="btn btn-primary" ng-click="UnlikeImage()" value="Unlike" />
+    </div>
+</div>
+<div class="col-md-7">
+    <p>Image list:</p>
+    <div ng-repeat="im in likedImages.imgs" ng-if="likedImages.imgs.length >0">
+        <p>{{im.imageName}}</p>
+        <img ng-src="{{im.imageContent}}" />
+    </div>
+    <div ng-if="likedImages.imgs.length <= 0">
+        <strong>No Image</strong>
+    </div>
+</div>
